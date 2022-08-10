@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple ToDo App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="p-40">
+        <form action="/add" method="POST" class="flex flex-col gap-1">
+            <div class="text-center flex flex-col gap-2">
+                <label class="font-bold text-4xl">ToDo</label>
+                <input type="text" name="title" placeholder="" class="border p-2 w-full"><br>
+            </div>
+            <button class="bg-blue-600 px-6 py-3 rounded-lg font-semibold mx-auto text-white" type="submit">
+                Add
+            </button>
+        </form>
+
+        {% for todo in todos %}
+        <div class="flex gap-10 justify-center items-center my-10 text-2xl">
+            <p class="ui big header"> {{ todo.title }}</p>
+
+            {% if todo.done == False %}
+            <span class="text-red-600 border-2 px-2 py-1">Not Complete</span>
+            {% else %}
+            <span class="text-blue-600 border-2 px-2 py-1">Completed</span>
+            {% endif %}
+
+            <a class="bg-blue-500 px-2 py-1 rounded-lg text-white" href="/update/{{ todo.id }}">Update</a>
+            <a class="bg-red-500 px-2 py-1 rounded-lg text-white" href="/delete/{{ todo.id }}">Delete</a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>
